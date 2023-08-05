@@ -1,6 +1,8 @@
 package org.example;
 
-public class Dog extends Animal implements iDog, iPet
+import java.util.function.Predicate;
+
+public class Dog extends Animal implements iDog, iPet, Comparable<Dog>
 {
     private String name;
     String ownerName;
@@ -10,6 +12,7 @@ public class Dog extends Animal implements iDog, iPet
         this.name = name;
         this.age = age;
     }
+    public String getName(){return this.name;}
     @Override
     public void woof() {System.out.println("гав гав");}
     @Override
@@ -24,4 +27,14 @@ public class Dog extends Animal implements iDog, iPet
     }
     @Override
     public void detachOwner() {owner = null;}
+    @Override
+    public String toString(){return "питомец[ кличка" + name + ", возраст " + age + ']';}
+    @Override
+    public int compareTo(Dog dog) {
+        return name.compareTo(dog.name);
+    }
+    public void checkAge()
+    {
+        Predicate<Integer> predicate = age -> age < 0;
+    }
 }

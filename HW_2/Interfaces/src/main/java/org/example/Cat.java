@@ -1,6 +1,6 @@
 package org.example;
 
-public class Cat extends Animal implements iCat, iPet
+public class Cat extends Animal implements iCat, iPet, Comparable<Cat>
 {
     private String name;
     String ownerName;
@@ -11,13 +11,8 @@ public class Cat extends Animal implements iCat, iPet
         this.name = name;
         this.age = age;
     }
+    public String getName(){return this.name;}
 
-    @Override
-    public void setOwner(Owner owner)
-    {
-        this.owner = owner;
-        this.ownerName = owner.getName();
-    }
 
     public String getOwner(){return ownerName;}
     public void detachOwner(){owner = null;}
@@ -34,4 +29,16 @@ public class Cat extends Animal implements iCat, iPet
     public void play() {System.out.println("кот играет");}
     @Override
     public void hunt() {System.out.println("кот охотится");}
+    @Override
+    public void setOwner(Owner owner)
+    {
+        this.owner = owner;
+        this.ownerName = owner.getName();
+    }
+    @Override
+    public String toString(){return "питомец[ кличка" + name + ", возраст " + age + ']';}
+    @Override
+    public int compareTo(Cat cat) {
+        return name.compareTo(cat.name);
+    }
 }
